@@ -37,11 +37,25 @@ export class Database {
     return data
   }
 
+  update(table, id, data) {
+    if (Array.isArray(this.#database[table])) {
+      const rowIndex = this.#database[table].findIndex(row => row.id === id)
+
+      console.log(rowIndex)
+
+      if (rowIndex > -1) {
+        this.#database[table][rowIndex] = { id, ...data }
+
+        this.#persist()
+      }
+    }
+  }
+
   delete(table, id) {
     if (Array.isArray(this.#database[table])) {
       const rowIndex = this.#database[table].findIndex(row => row.id === id)
 
-      if (rowIndex < -1) {
+      if (rowIndex > -1) {
         this.#database[table].splice(rowIndex, 1)
 
         this.#persist()
