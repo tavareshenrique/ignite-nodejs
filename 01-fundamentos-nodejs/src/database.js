@@ -41,8 +41,6 @@ export class Database {
     if (Array.isArray(this.#database[table])) {
       const rowIndex = this.#database[table].findIndex(row => row.id === id)
 
-      console.log(rowIndex)
-
       if (rowIndex > -1) {
         this.#database[table][rowIndex] = { id, ...data }
 

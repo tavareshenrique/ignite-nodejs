@@ -7,8 +7,6 @@ class InverseNumberStream extends Transform {
     const number = Number(chunk.toString())
     const result = number * -1
 
-    console.log(result)
-
     callback(null, Buffer.from(`${result}\n`))
   }
 }
@@ -21,8 +19,6 @@ const server = http.createServer(async (req, res) => {
   }
 
   const fullStreamContent = Buffer.concat(buffers).toString()
-
-  console.log(fullStreamContent)
 
   return res.end(fullStreamContent)
 
