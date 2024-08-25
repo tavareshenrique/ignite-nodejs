@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Daily Diet API" title="Daily Diet API" src="https://raw.githubusercontent.com/tavareshenrique/ignite-nodejs/main/%40assets/logo.webp" width="100px" />
+  <img alt="Ignite NodeJS" title="Ignite NodeJS" src="https://raw.githubusercontent.com/tavareshenrique/ignite-nodejs/main/%40assets/logo.webp" width="100px" />
 </h1>
 
 <p align="center">
