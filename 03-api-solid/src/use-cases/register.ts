@@ -1,6 +1,6 @@
 import { hash } from 'bcryptjs'
 
-import { prisma } from '@/lib/prisma'
+import { IUserRepository } from '@/repositories/users-repository'
 
 interface IRegisterUseCaseRequest {
 	email: string
@@ -10,16 +10,12 @@ interface IRegisterUseCaseRequest {
 
 // D - Dependency Inversion Principle
 export class RegisterUseCase {
-	constructor(private usersRepository: any) {}
+	constructor(private usersRepository: IUserRepository) {}
 
 	async execute({ email, name, password }: IRegisterUseCaseRequest) {
 		const password_hash = await hash(password, 6)
 
-		const userWithSameEmail = await prisma.user.findUnique({
-			where: {
-				email,
-			},
-		})
+		const userWithSameEmail = await this.usersRepository.findByEmail(email)
 
 		if (userWithSameEmail) {
 			throw new Error('User with same email already exists')
