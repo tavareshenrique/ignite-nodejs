@@ -27,6 +27,7 @@
     "email": "ihenrits@gmail.com"
   },
   "devDependencies": {
+    "@faker-js/faker": "9.0.1",
     "@rocketseat/eslint-config": "2.2.2",
     "@types/bcryptjs": "2.4.6",
     "@types/node": "22.5.0",
