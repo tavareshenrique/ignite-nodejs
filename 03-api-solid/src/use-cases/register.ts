@@ -1,3 +1,4 @@
+import { User } from '@prisma/client'
 import { hash } from 'bcryptjs'
 
 import { IUserRepository } from '@/repositories/users-repository'
@@ -10,11 +11,19 @@ interface IRegisterUseCaseRequest {
 	password: string
 }
 
+interface IRegisterUseCaseResponse {
+	user: User
+}
+
 // D - Dependency Inversion Principle
 export class RegisterUseCase {
 	constructor(private usersRepository: IUserRepository) {}
 
-	async execute({ email, name, password }: IRegisterUseCaseRequest) {
+	async execute({
+		email,
+		name,
+		password,
+	}: IRegisterUseCaseRequest): Promise<IRegisterUseCaseResponse> {
 		const password_hash = await hash(password, 6)
 
 		const userWithSameEmail = await this.usersRepository.findByEmail(email)
@@ -23,10 +32,14 @@ export class RegisterUseCase {
 			throw new UserAlreadyExistsError()
 		}
 
-		await this.usersRepository.create({
+		const user = await this.usersRepository.create({
 			email,
 			name,
 			password_hash,
 		})
+
+		return {
+			user,
+		}
 	}
 }
