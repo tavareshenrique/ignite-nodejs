@@ -98,8 +98,8 @@ describe('Check-in Use Case', () => {
 			phone: '',
 		})
 
-		expect(
-			await sut.execute({
+		await expect(
+			sut.execute({
 				gymId: 'gym-02',
 				userId: 'user-id',
 				userLatitude: -22.5906769,
