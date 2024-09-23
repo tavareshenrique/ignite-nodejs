@@ -20,7 +20,7 @@ describe('Check-in Use Case', () => {
 		sut = new CheckInUseCase(checkInsRepository, gymsRepository)
 
 		gymsRepository.items.push({
-			id: 'gym-id',
+			id: 'gym-01',
 			name: 'Gym JS',
 			description: 'Description',
 			latitude: new Decimal(-22.5906769),
@@ -37,7 +37,7 @@ describe('Check-in Use Case', () => {
 
 	it('should be able to check in', async () => {
 		const { checkIn } = await sut.execute({
-			gymId: 'gym-id',
+			gymId: 'gym-01',
 			userId: 'user-id',
 			userLatitude: -22.5906769,
 			userLongitude: -42.9642715,
@@ -50,7 +50,7 @@ describe('Check-in Use Case', () => {
 		vi.setSystemTime(new Date(2022, 0, 20, 8, 0, 0))
 
 		await sut.execute({
-			gymId: 'gym-id',
+			gymId: 'gym-01',
 			userId: 'user-id',
 			userLatitude: -22.5906769,
 			userLongitude: -42.9642715,
@@ -58,7 +58,7 @@ describe('Check-in Use Case', () => {
 
 		await expect(
 			sut.execute({
-				gymId: 'gym-id',
+				gymId: 'gym-01',
 				userId: 'user-id',
 				userLatitude: -22.5906769,
 				userLongitude: -42.9642715,
@@ -70,7 +70,7 @@ describe('Check-in Use Case', () => {
 		vi.setSystemTime(new Date(2022, 0, 20, 8, 0, 0))
 
 		await sut.execute({
-			gymId: 'gym-id',
+			gymId: 'gym-01',
 			userId: 'user-id',
 			userLatitude: -22.5906769,
 			userLongitude: -42.9642715,
@@ -79,12 +79,32 @@ describe('Check-in Use Case', () => {
 		vi.setSystemTime(new Date(2022, 0, 21, 8, 0, 0))
 
 		const { checkIn } = await sut.execute({
-			gymId: 'gym-id',
+			gymId: 'gym-01',
 			userId: 'user-id',
 			userLatitude: -22.5906769,
 			userLongitude: -42.9642715,
 		})
 
 		expect(checkIn.id).toEqual(expect.any(String))
+	})
+
+	it('should not be able to check in on distant gym', async () => {
+		gymsRepository.items.push({
+			id: 'gym-02',
+			name: 'Gym JS New',
+			description: 'Description',
+			latitude: new Decimal(-22.5133057),
+			longitude: new Decimal(-43.1693313),
+			phone: '',
+		})
+
+		expect(
+			await sut.execute({
+				gymId: 'gym-02',
+				userId: 'user-id',
+				userLatitude: -22.5906769,
+				userLongitude: -42.9642715,
+			}),
+		).rejects.toBeInstanceOf(Error)
 	})
 })
