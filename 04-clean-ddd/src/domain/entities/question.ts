@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 
-import { Optional } from "../../core/types/optional";
+import { Optional } from "@/core/types/optional";
 
-import { Entity } from "../../core/entities/entity";
-import { UniqueEntityId } from "../../core/entities/unique-entity-id";
+import { Entity } from "@/core/entities/entity";
+import { UniqueEntityId } from "@/core/entities/unique-entity-id";
 
 import { Slug } from "./value-objects/slug";
 
