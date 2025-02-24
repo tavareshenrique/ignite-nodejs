@@ -1,15 +1,15 @@
-import { AnswerQuestion } from './answer-question'
+import { AnswerQuestionUseCase } from './answer-question'
 import { AnswersRepository } from '../repositories/answers-repository'
 import { Answer } from '../../enterprise/entities/answer'
 
 const fakeAnswersRepository: AnswersRepository = {
-  create: async (answer: Answer) => {
+  create: async (_: Answer) => {
     return
   },
 }
 
 test('create an answer', async () => {
-  const answerQuestion = new AnswerQuestion(fakeAnswersRepository)
+  const answerQuestion = new AnswerQuestionUseCase(fakeAnswersRepository)
 
   const answer = await answerQuestion.execute({
     content: 'Nova Resposta',
