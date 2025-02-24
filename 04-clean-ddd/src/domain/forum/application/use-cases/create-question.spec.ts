@@ -1,6 +1,3 @@
-import { AnswerQuestion } from './answer-question'
-import { AnswersRepository } from '../repositories/answers-repository'
-import { Answer } from '../../enterprise/entities/answer'
 import { QuestionsRepository } from '../repositories/questions-repository'
 import { Question } from '../../enterprise/entities/question'
 import { CreateQuestionUseCase } from './create-question'
