@@ -9,7 +9,7 @@ import { Slug } from './value-objects/slug'
 
 interface QuestionProps {
   authorId: UniqueEntityId;
-  bestAnswerId: UniqueEntityId;
+  bestAnswerId?: UniqueEntityId;
   title: string;
   content: string;
   slug: Slug;
@@ -72,7 +72,7 @@ export class Question extends Entity<QuestionProps> {
     this.touch()
   }
 
-  set bestAnswerId(bestAnswerId: UniqueEntityId) {
+  set bestAnswerId(bestAnswerId: UniqueEntityId | undefined) {
     this.props.bestAnswerId = bestAnswerId
     this.touch()
   }
