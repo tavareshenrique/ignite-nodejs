@@ -19,6 +19,16 @@ export class InMemoryAnswerRepository implements AnswersRepository {
     this.items.push(answer)
   }
 
+  async save(answer: Answer): Promise<void> {
+    const answerIndex = this.items.findIndex((item) => item.id === answer.id)
+
+    if (answerIndex === -1) {
+      throw new Error('Answer not found')
+    }
+
+    this.items[answerIndex] = answer
+  }
+
   async delete(answer: Answer): Promise<void> {
     const answerIndex = this.items.findIndex((item) => item.id === answer.id)
 
