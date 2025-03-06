@@ -1,20 +1,20 @@
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { makeAnswer } from 'test/factories/make-answer'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
-import { InMemoryQuestionRepository } from 'test/repositories/in-memory-questions-repository'
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
 import { ChooseQuestionBestAnswerUseCase } from './choose-question-best-answer'
 import { makeQuestion } from 'test/factories/make-question'
 
-let inMemoryQuestionRepository: InMemoryQuestionRepository
+let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let sut: ChooseQuestionBestAnswerUseCase
 
 describe('Choose Question Best Answer', () => {
   beforeEach(() => {
     inMemoryAnswersRepository = new InMemoryAnswersRepository()
-    inMemoryQuestionRepository = new InMemoryQuestionRepository()
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
     sut = new ChooseQuestionBestAnswerUseCase(
-      inMemoryQuestionRepository, inMemoryAnswersRepository,
+      inMemoryQuestionsRepository, inMemoryAnswersRepository,
     )
   })
 
@@ -25,7 +25,7 @@ describe('Choose Question Best Answer', () => {
       questionId: question.id,
     })
 
-    await inMemoryQuestionRepository.create(question)
+    await inMemoryQuestionsRepository.create(question)
     await inMemoryAnswersRepository.create(answer)
 
     await sut.execute({
@@ -33,7 +33,7 @@ describe('Choose Question Best Answer', () => {
       authorId: question.authorId.toString(),
     })
 
-    expect(inMemoryQuestionRepository.items[0].bestAnswerId).toBe(answer.id)
+    expect(inMemoryQuestionsRepository.items[0].bestAnswerId).toBe(answer.id)
   })
 
   it('should not be able to choose another user question best answer', async () => {
@@ -45,7 +45,7 @@ describe('Choose Question Best Answer', () => {
       questionId: question.id,
     })
 
-    await inMemoryQuestionRepository.create(question)
+    await inMemoryQuestionsRepository.create(question)
     await inMemoryAnswersRepository.create(answer)
 
     await expect(() => sut.execute({
