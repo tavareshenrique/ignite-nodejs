@@ -4,6 +4,7 @@ import { Comment, CommentProps } from './comment'
 
 export interface AnswerCommentProps extends CommentProps {
   authorId: UniqueEntityId
+  answerId: UniqueEntityId
 }
 
 export class AnswerComment extends Comment<AnswerCommentProps> {
