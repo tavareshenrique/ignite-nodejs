@@ -1,4 +1,7 @@
+import { Either, left, right } from '@/core/either'
 import { AnswerCommentsRepository } from '../repositories/answer-comments-repository'
+
+type DeleteAnswerCommentUseCaseResponse = Either<string, object>
 
 interface DeleteAnswerCommentUseCaseRequest {
   authorId: string;
@@ -10,17 +13,19 @@ export class DeleteAnswerCommentUseCase {
     private answerCommentsRepository: AnswerCommentsRepository,
   ) {}
 
-  async execute({ authorId, answerCommentId }: DeleteAnswerCommentUseCaseRequest): Promise<void> {
+  async execute({ authorId, answerCommentId }: DeleteAnswerCommentUseCaseRequest): Promise<DeleteAnswerCommentUseCaseResponse> {
     const answerComment = await this.answerCommentsRepository.findById(answerCommentId)
 
     if (!answerComment) {
-      throw new Error('Answer Comment not found')
+      return left('Answer Comment not found')
     }
 
     if (answerComment.authorId.toString() !== authorId) {
-      throw new Error('Not allowed')
+      return left('Not allowed')
     }
 
     await this.answerCommentsRepository.delete(answerComment)
+
+    return right({})
   }
 }
