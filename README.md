@@ -21,6 +21,8 @@
     - [API Rest NodeJS](#api-rest-nodejs)
   - [Chapter III](#three-chapter-iii)
     - [API Solid](#api-solid)
+  - [Chapter IV](#three-chapter-iv)
+    - [Clean DDD](#clean-ddd)
 - [Desafios](#atom_symbol-desafios)
   - [Chapter I](#one-challenge-chapter-i)
      - [Classic ToDo](#classic-todo)
@@ -53,6 +55,13 @@ O <b>API Rest NodeJS</b> é o projeto do <b>segundo módulo</b> do curso <b>Igni
 
 O <b>API Solid</b> é o projeto do <b>terceiro módulo</b> do curso <b>Ignite NodeJS</b> da Rocketseat. O projeto consiste em criar uma API de Checkin em Academias utilizando SOLID e Clean Architecture.
 > Acesse [aqui](https://github.com/tavareshenrique/ignite-nodejs/tree/main/03-api-solid).
+
+## :three: Chapter IV
+
+### Clean DDD
+
+O <b>Clean DD</b> é o projeto do <b>quarto módulo</b> do curso <b>Ignite NodeJS</b> da Rocketseat. O projeto consiste em criar um projeto de Forum usando conceitos de DDD e Clean Architecture.
+> Acesse [aqui](https://github.com/tavareshenrique/ignite-nodejs/tree/main/04-clean-ddd).
 
 # :atom_symbol: Desafios
 
