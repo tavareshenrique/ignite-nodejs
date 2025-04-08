@@ -33,8 +33,6 @@ export class CreateQuestionController {
     @Body(bodyValidationPipe) body: CreateQuestionBodySchema,
     @CurrentUser() user: UserPayload,
   ) {
-    console.log('Creating question', body, user);
-
     const { title, content } = body;
     const userId = user.sub;
 
