@@ -5,7 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 
 import { JwtStrategy } from './jwt.strategy';
 
-import { Env } from '@/env';
+import { Env } from '../env';
 
 @Module({
   imports: [
