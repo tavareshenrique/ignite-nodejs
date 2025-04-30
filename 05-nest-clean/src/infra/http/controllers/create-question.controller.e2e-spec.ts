@@ -30,7 +30,7 @@ describe('Create question (E2E)', () => {
     await app.init();
   });
 
-  test('[POST] /accounts', async () => {
+  test('[POST] /questions', async () => {
     const user = await studentFactory.makePrismaStudent();
 
     const accessToken = jwt.sign({
