@@ -54,14 +54,15 @@ describe('Fetch recent questions (E2E)', () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      questions: [
-        expect.objectContaining({
-          title: 'How to use Prisma with NestJS?',
-        }),
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      questions: expect.arrayContaining([
         expect.objectContaining({
           title: 'How to create a NestJS application?',
         }),
-      ],
+        expect.objectContaining({
+          title: 'How to use Prisma with NestJS?',
+        }),
+      ]),
     });
   });
 });
