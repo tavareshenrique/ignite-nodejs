@@ -1,23 +1,29 @@
 import { AppModule } from '@/infra/app.module';
-import { PrismaService } from '@/infra/database/prisma/prisma.service';
+import { DatabaseModule } from '@/infra/database/prisma/database.module';
 import { INestApplication } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
+import { QuestionFactory } from 'test/factories/make-question';
+import { StudentFactory } from 'test/factories/make-student';
 
 describe('Fetch recent questions (E2E)', () => {
   let app: INestApplication;
-  let prisma: PrismaService;
+  let studentFactory: StudentFactory;
+  let questionFactory: QuestionFactory;
   let jwt: JwtService;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, DatabaseModule],
+      providers: [StudentFactory, QuestionFactory],
     }).compile();
 
     app = moduleRef.createNestApplication();
 
-    prisma = moduleRef.get(PrismaService);
+    studentFactory = moduleRef.get(StudentFactory);
+
+    questionFactory = moduleRef.get(QuestionFactory);
 
     jwt = moduleRef.get(JwtService);
 
@@ -25,35 +31,22 @@ describe('Fetch recent questions (E2E)', () => {
   });
 
   test('[GET] /questions', async () => {
-    const user = await prisma.user.create({
-      data: {
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        password: 'password123',
-      },
-    });
+    const user = await studentFactory.makePrismaStudent();
 
     const accessToken = jwt.sign({
-      sub: user.id,
+      sub: user.id.toString(),
     });
 
-    await prisma.question.createMany({
-      data: [
-        {
-          title: 'How to create a NestJS application?',
-          slug: 'how-to-create-a-nestjs-application',
-          content: 'I want to create a NestJS application. How can I do that?',
-          authorId: user.id,
-        },
-        {
-          title: 'How to use Prisma with NestJS?',
-          slug: 'how-to-use-prisma-with-nestjs',
-          content:
-            'I want to use Prisma with my NestJS application. How can I do that?',
-          authorId: user.id,
-        },
-      ],
-    });
+    await Promise.all([
+      questionFactory.makePrismaQuestion({
+        authorId: user.id,
+        title: 'How to create a NestJS application?',
+      }),
+      questionFactory.makePrismaQuestion({
+        authorId: user.id,
+        title: 'How to use Prisma with NestJS?',
+      }),
+    ]);
 
     const response = await request(app.getHttpServer())
       .get('/questions')
@@ -63,10 +56,10 @@ describe('Fetch recent questions (E2E)', () => {
     expect(response.body).toEqual({
       questions: [
         expect.objectContaining({
-          title: 'How to create a NestJS application?',
+          title: 'How to use Prisma with NestJS?',
         }),
         expect.objectContaining({
-          title: 'How to use Prisma with NestJS?',
+          title: 'How to create a NestJS application?',
         }),
       ],
     });
