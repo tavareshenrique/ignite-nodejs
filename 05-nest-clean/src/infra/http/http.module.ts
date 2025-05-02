@@ -9,6 +9,7 @@ import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases
 import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/get-question-by-slug';
 import { AnswerQuestionUseCase } from '@/domain/forum/application/use-cases/answer-question';
 import { EditAnswerUseCase } from '@/domain/forum/application/use-cases/edit-answer';
+import { DeleteAnswerUseCase } from '@/domain/forum/application/use-cases/delete-answer';
 
 import { CreateAccountController } from './controllers/create-account.controller';
 import { EditQuestionController } from './controllers/edit-question.controller';
@@ -19,6 +20,7 @@ import { FetchRecentQuestionsController } from './controllers/fetch-recent-quest
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller';
 import { AnswerQuestionController } from './controllers/answer-question.controller';
 import { EditAnswerController } from './controllers/edit-answer.controller';
+import { DeleteAnswerController } from './controllers/delete-answer.controller';
 
 import { CryptographyModule } from '../cryptography/cryptography.module';
 import { DatabaseModule } from '../database/prisma/database.module';
@@ -35,6 +37,7 @@ import { DatabaseModule } from '../database/prisma/database.module';
     DeleteQuestionController,
     AnswerQuestionController,
     EditAnswerController,
+    DeleteAnswerController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -46,6 +49,7 @@ import { DatabaseModule } from '../database/prisma/database.module';
     GetQuestionBySlugUseCase,
     AnswerQuestionUseCase,
     EditAnswerUseCase,
+    DeleteAnswerUseCase,
   ],
 })
 export class HttpModule {}
