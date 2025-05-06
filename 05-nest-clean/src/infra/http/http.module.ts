@@ -17,6 +17,7 @@ import { DeleteQuestionCommentUseCase } from '@/domain/forum/application/use-cas
 import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/comment-on-answer';
 import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases/delete-answer-comment';
 import { FetchQuestionCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-question-comments';
+import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-answer-comments';
 
 import { CreateAccountController } from './controllers/create-account.controller';
 import { EditQuestionController } from './controllers/edit-question.controller';
@@ -35,6 +36,7 @@ import { CommentOnAnswerController } from './controllers/comment-on-answer.contr
 import { DeleteAnswerCommentController } from './controllers/delete-answer-comment.controller';
 import { FetchQuestionAnswersController } from './controllers/fetch-question-answers.controller';
 import { FetchQuestionCommentsController } from './controllers/fetch-question-comments.controller';
+import { FetchAnswerCommentsController } from './controllers/fetch-answer-comments.controller';
 
 import { CryptographyModule } from '../cryptography/cryptography.module';
 import { DatabaseModule } from '../database/prisma/database.module';
@@ -59,6 +61,7 @@ import { DatabaseModule } from '../database/prisma/database.module';
     CommentOnAnswerController,
     DeleteAnswerCommentController,
     FetchQuestionCommentsController,
+    FetchAnswerCommentsController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -78,6 +81,7 @@ import { DatabaseModule } from '../database/prisma/database.module';
     CommentOnAnswerUseCase,
     DeleteAnswerCommentUseCase,
     FetchQuestionCommentsUseCase,
+    FetchAnswerCommentsUseCase,
   ],
 })
 export class HttpModule {}
