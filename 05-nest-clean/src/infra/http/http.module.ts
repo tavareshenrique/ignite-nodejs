@@ -15,6 +15,7 @@ import { ChooseQuestionBestAnswerUseCase } from '@/domain/forum/application/use-
 import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question';
 import { DeleteQuestionCommentUseCase } from '@/domain/forum/application/use-cases/delete-question-comment';
 import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/comment-on-answer';
+import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases/delete-answer-comment';
 
 import { CreateAccountController } from './controllers/create-account.controller';
 import { EditQuestionController } from './controllers/edit-question.controller';
@@ -31,6 +32,7 @@ import { ChooseQuestionBestAnswerController } from './controllers/choose-questio
 import { CommentOnQuestionController } from './controllers/comment-on-question.controller';
 import { DeleteQuestionCommentController } from './controllers/delete-question-comment';
 import { CommentOnAnswerController } from './controllers/comment-on-answer.controller';
+import { DeleteAnswerCommentController } from './controllers/delete-answer-comment.controller';
 
 import { CryptographyModule } from '../cryptography/cryptography.module';
 import { DatabaseModule } from '../database/prisma/database.module';
@@ -53,6 +55,7 @@ import { DatabaseModule } from '../database/prisma/database.module';
     CommentOnQuestionController,
     DeleteQuestionCommentController,
     CommentOnAnswerController,
+    DeleteAnswerCommentController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -70,6 +73,7 @@ import { DatabaseModule } from '../database/prisma/database.module';
     CommentOnQuestionUseCase,
     DeleteQuestionCommentUseCase,
     CommentOnAnswerUseCase,
+    DeleteAnswerCommentUseCase,
   ],
 })
 export class HttpModule {}
