@@ -30,9 +30,7 @@ export class CommentOnQuestionController {
   @Post()
   async handle(
     @Body(bodyValidationPipe) body: CommentOnQuestionBodySchema,
-
     @CurrentUser() user: UserPayload,
-
     @Param('questionId') questionId: string,
   ) {
     const { content } = body;
@@ -41,9 +39,7 @@ export class CommentOnQuestionController {
 
     const result = await this.commentOnQuestion.execute({
       content,
-
       questionId,
-
       authorId: userId,
     });
 
