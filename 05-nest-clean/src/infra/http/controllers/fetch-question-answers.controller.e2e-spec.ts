@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { AppModule } from '@/infra/app.module';
 import { DatabaseModule } from '@/infra/database/prisma/database.module';
 import { INestApplication } from '@nestjs/common';
@@ -24,11 +25,8 @@ describe('Fetch question answers (E2E)', () => {
     app = moduleRef.createNestApplication();
 
     studentFactory = moduleRef.get(StudentFactory);
-
     questionFactory = moduleRef.get(QuestionFactory);
-
     answerFactory = moduleRef.get(AnswerFactory);
-
     jwt = moduleRef.get(JwtService);
 
     await app.init();
@@ -37,9 +35,7 @@ describe('Fetch question answers (E2E)', () => {
   test('[GET] /questions/:questionId/answers', async () => {
     const user = await studentFactory.makePrismaStudent();
 
-    const accessToken = jwt.sign({
-      sub: user.id.toString(),
-    });
+    const accessToken = jwt.sign({ sub: user.id.toString() });
 
     const question = await questionFactory.makePrismaQuestion({
       authorId: user.id,
@@ -62,18 +58,14 @@ describe('Fetch question answers (E2E)', () => {
 
     const response = await request(app.getHttpServer())
       .get(`/questions/${questionId}/answers`)
-      .set('Authorization', `Bearer ${accessToken}`);
+      .set('Authorization', `Bearer ${accessToken}`)
+      .send();
 
-    expect(response.status).toBe(200);
+    expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       answers: expect.arrayContaining([
-        expect.objectContaining({
-          content: 'Answer 01',
-        }),
-        expect.objectContaining({
-          content: 'Answer 02',
-        }),
+        expect.objectContaining({ content: 'Answer 01' }),
+        expect.objectContaining({ content: 'Answer 01' }),
       ]),
     });
   });

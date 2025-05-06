@@ -6,20 +6,16 @@ import {
   Query,
 } from '@nestjs/common';
 import { z } from 'zod';
-
-import { ZodValidationPipe } from '../pipes/zod-validation';
-
 import { FetchQuestionAnswersUseCase } from '@/domain/forum/application/use-cases/fetch-question-answers';
 import { AnswerPresenter } from '../presenters/answer-presenter';
+import { ZodValidationPipe } from '../pipes/zod-validation';
 
 const pageQueryParamSchema = z
   .string()
   .optional()
   .default('1')
   .transform(Number)
-  .pipe(
-    z.number().min(1, { message: 'Page must be greater than or equal to 1' }),
-  );
+  .pipe(z.number().min(1));
 
 const queryValidationPipe = new ZodValidationPipe(pageQueryParamSchema);
 
@@ -45,8 +41,6 @@ export class FetchQuestionAnswersController {
 
     const answers = result.value.answers;
 
-    return {
-      answers: answers.map((answer) => AnswerPresenter.toHTTP(answer)),
-    };
+    return { answers: answers.map((answer) => AnswerPresenter.toHTTP(answer)) };
   }
 }

@@ -27,12 +27,12 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
 import { AnswerQuestionController } from './controllers/answer-question.controller';
 import { EditAnswerController } from './controllers/edit-answer.controller';
 import { DeleteAnswerController } from './controllers/delete-answer.controller';
-import { FetchQuestionAnswersController } from './controllers/fetch-questions.controller';
 import { ChooseQuestionBestAnswerController } from './controllers/choose-question-best-answer.controller';
 import { CommentOnQuestionController } from './controllers/comment-on-question.controller';
 import { DeleteQuestionCommentController } from './controllers/delete-question-comment';
 import { CommentOnAnswerController } from './controllers/comment-on-answer.controller';
 import { DeleteAnswerCommentController } from './controllers/delete-answer-comment.controller';
+import { FetchQuestionAnswersController } from './controllers/fetch-question-answers.controller';
 
 import { CryptographyModule } from '../cryptography/cryptography.module';
 import { DatabaseModule } from '../database/prisma/database.module';
