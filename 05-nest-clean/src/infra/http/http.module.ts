@@ -37,6 +37,7 @@ import { DeleteAnswerCommentController } from './controllers/delete-answer-comme
 import { FetchQuestionAnswersController } from './controllers/fetch-question-answers.controller';
 import { FetchQuestionCommentsController } from './controllers/fetch-question-comments.controller';
 import { FetchAnswerCommentsController } from './controllers/fetch-answer-comments.controller';
+import { UploadAttachmentController } from './controllers/upload-attachment.controller';
 
 import { CryptographyModule } from '../cryptography/cryptography.module';
 import { DatabaseModule } from '../database/prisma/database.module';
@@ -62,6 +63,7 @@ import { DatabaseModule } from '../database/prisma/database.module';
     DeleteAnswerCommentController,
     FetchQuestionCommentsController,
     FetchAnswerCommentsController,
+    UploadAttachmentController,
   ],
   providers: [
     CreateQuestionUseCase,
