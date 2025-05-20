@@ -39,5 +39,9 @@ describe('Upload attachment (E2E)', () => {
       .attach('file', './test/e2e/sample-upload.png');
 
     expect(response.status).toBe(201);
+    expect(response.body).toEqual({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      attachmentId: expect.any(String),
+    });
   });
 });
